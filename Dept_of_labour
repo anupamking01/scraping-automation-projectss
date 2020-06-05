@@ -1,0 +1,190 @@
+Link: http://www.labourcis.nic.in/fse05_search.asp
+
+code:
+1:
+import mechanize
+from bs4 import BeautifulSoup
+import urllib.request
+import http.cookiejar as cookielib
+import csv
+cj = cookielib.CookieJar()
+br = mechanize.Browser()
+br.set_cookiejar(cj)
+br.open("http://www.labourcis.nic.in/fse05_search.asp")
+
+br.select_form(nr=0)
+br.form['ename'] = ''
+br.form['catid'] = ['1',]
+br.form['locality'] = ''
+br.form['natid'] = ['139',]
+br.submit()
+
+#print(br.response().read())
+from bs4 import BeautifulSoup
+ 
+soup = BeautifulSoup(br.response().read())
+
+with open('Assignment7(0).csv', 'w', newline='',encoding = "utf-8") as csvfile:
+    f = csv.writer(csvfile)
+    tags = soup.findAll("tr")
+    
+    
+    for tr in tags[2:-1]:
+        data = []
+        cols = tr.find_all('td')  # find all td tags
+
+        for td in cols:
+            data.append(td.text.strip())
+        f.writerow(data)
+        print(data)
+		
+		
+2.
+import mechanize
+from bs4 import BeautifulSoup
+import urllib.request
+import http.cookiejar as cookielib
+import csv
+cj = cookielib.CookieJar()
+br = mechanize.Browser()
+br.set_cookiejar(cj)
+br.open("http://www.labourcis.nic.in/fse05_search.asp")
+
+br.select_form(nr=0)
+br.form['ename'] = ''
+br.form['catid'] = ['2',]
+br.form['locality'] = ''
+br.form['natid'] = ['139',]
+br.submit()
+
+#print(br.response().read())
+from bs4 import BeautifulSoup
+ 
+soup = BeautifulSoup(br.response().read())
+
+with open('Assignment7(0).csv', 'w', newline='',encoding = "utf-8") as csvfile:
+    f = csv.writer(csvfile)
+    tags = soup.findAll("tr")
+    
+    
+    for tr in tags[2:-1]:
+        data = []
+        cols = tr.find_all('td')  # find all td tags
+
+        for td in cols:
+            data.append(td.text.strip())
+        f.writerow(data)
+        print(data)		
+		
+		
+3)
+import mechanize
+from bs4 import BeautifulSoup
+import urllib.request
+import http.cookiejar as cookielib
+import csv
+cj = cookielib.CookieJar()
+br = mechanize.Browser()
+br.set_cookiejar(cj)
+br.open("http://www.labourcis.nic.in/fse05_search.asp")
+
+br.select_form(nr=0)
+br.form['ename'] = ''
+br.form['catid'] = ['3',]
+br.form['locality'] = ''
+br.form['natid'] = ['139',]
+br.submit()
+
+#print(br.response().read())
+from bs4 import BeautifulSoup
+ 
+soup = BeautifulSoup(br.response().read())
+
+with open('Assignment7(0).csv', 'w', newline='',encoding = "utf-8") as csvfile:
+    f = csv.writer(csvfile)
+    tags = soup.findAll("tr")
+    
+    
+    for tr in tags[2:-1]:
+        data = []
+        cols = tr.find_all('td')  # find all td tags
+
+        for td in cols:
+            data.append(td.text.strip())
+        f.writerow(data)
+        print(data)		
+		
+		
+4.
+import mechanize
+from bs4 import BeautifulSoup
+import urllib.request
+import http.cookiejar as cookielib
+import csv
+cj = cookielib.CookieJar()
+br = mechanize.Browser()
+br.set_cookiejar(cj)
+br.open("http://www.labourcis.nic.in/fse05_search.asp")
+
+br.select_form(nr=0)
+br.form['ename'] = ''
+br.form['catid'] = ['4',]
+br.form['locality'] = ''
+br.form['natid'] = ['139',]
+br.submit()
+
+#print(br.response().read())
+from bs4 import BeautifulSoup
+ 
+soup = BeautifulSoup(br.response().read())
+
+with open('Assignment7(0).csv', 'w', newline='',encoding = "utf-8") as csvfile:
+    f = csv.writer(csvfile)
+    tags = soup.findAll("tr")
+    
+    
+    for tr in tags[2:-1]:
+        data = []
+        cols = tr.find_all('td')  # find all td tags
+
+        for td in cols:
+            data.append(td.text.strip())
+        f.writerow(data)
+        print(data)		
+		
+5.
+import mechanize
+from bs4 import BeautifulSoup
+import urllib.request
+import http.cookiejar as cookielib
+import csv
+cj = cookielib.CookieJar()
+br = mechanize.Browser()
+br.set_cookiejar(cj)
+br.open("http://www.labourcis.nic.in/fse05_search.asp")
+
+br.select_form(nr=0)
+br.form['ename'] = ''
+br.form['catid'] = ['8',]
+br.form['locality'] = ''
+br.form['natid'] = ['139',]
+br.submit()
+
+#print(br.response().read())
+from bs4 import BeautifulSoup
+ 
+soup = BeautifulSoup(br.response().read())
+
+with open('Assignment7(0).csv', 'w', newline='',encoding = "utf-8") as csvfile:
+    f = csv.writer(csvfile)
+    tags = soup.findAll("tr")
+    
+    
+    for tr in tags[2:-1]:
+        data = []
+        cols = tr.find_all('td')  # find all td tags
+
+        for td in cols:
+            data.append(td.text.strip())
+        f.writerow(data)
+        print(data)		

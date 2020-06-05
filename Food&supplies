@@ -1,0 +1,130 @@
+link: https://www.wbpds.gov.in/rptForUsers/RptOnGodownDetails.aspx
+
+code:
+ !pip install selenium
+ !pip install selenium
+ !apt-get update # to update ubuntu to correctly run apt install
+ !apt install chromium-chromedriver
+ !cp /usr/lib/chromium-browser/chromedriver /usr/bin
+
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait as wait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
+import time
+from selenium.webdriver.support import ui
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+from selenium.common.exceptions import TimeoutException
+
+import sys
+from selenium.webdriver.support.ui import Select
+path='E:/software/chrome_file/chromedriver'
+from selenium import webdriver
+
+import time
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--disable-dev-shm-usage')
+wd = webdriver.Chrome('chromedriver',chrome_options=chrome_options)
+wd.get("https://www.wbpds.gov.in/rptForUsers/RptOnGodownDetails.aspx")
+
+#wait(wd, 15).until(EC.presence_of_element_located((By.XPATH, "//span[contains(@id,'txtCaptcha2')]")))
+'''''
+sub_photo = wd.find_element_by_id('hidden_captcha2')
+print(sub_photo)
+sub_photo= sub_photo.get_attribute('value')
+s = str(sub_photo).replace(' ','')
+print(s)
+
+wait(wd, 15).until(EC.presence_of_element_located((By.XPATH, "//input[contains(@id,'hidden_captcha2')]")))
+
+text_input = wd.find_element_by_id("txtInput2")
+#time.sleep(2)
+print(text_input)
+text_input.send_keys(sub_photo)
+'''''
+
+#act = wd.find_element_by_id("act")
+#act.send_keys("SEF")
+#district = wd.find_elements_by_class_name("userProperties(district)")
+#district.send_keys("1")
+dropdown1 = Select(wd.find_element_by_name("ctl00$ContentPlaceHolder1$ddlGodownType"))
+print(wd.find_element_by_name("ctl00$ContentPlaceHolder1$ddlGodownType"))
+dropdown1.select_by_value("State")
+dropdown2 = Select(wd.find_element_by_id("ctl00_ContentPlaceHolder1_ddlDistrict"))
+print(wd.find_element_by_id("ctl00_ContentPlaceHolder1_ddlDistrict"))
+dropdown2.select_by_value("1")
+#wait(wd, 15).until(EC.presence_of_element_located((By.XPATH,"//button[contains(@onclick,'verify(2);')]" )))
+#wd.findElement(By.xpath("//input[@name='organization_name']")).sendKeys("Lambdatest Org");
+#enter_chat = driver.find_element_by_xpath("//img[contains(text(),'1236548597')]")
+s=wd.find_element_by_xpath("//input[contains(@onclick ,'javascript:WebForm_DoPostBackWithOptions')]")
+s.click()
+
+#wd.implicitly_wait(50000)
+print(wd.page_source)
+#sub_list = []
+#sub_list.append(sub_photo)
+
+from bs4 import BeautifulSoup
+import urllib.request
+import csv
+#import PyPDF2
+
+soup = BeautifulSoup(wd.page_source, 'html.parser')
+
+with open('West_Bengal.csv', 'w', newline='',encoding = "utf-8") as csvfile:
+  f = csv.writer(csvfile)
+    
+  flag = True
+  lis2 = []
+
+  for tag in tags[0:1]:
+    cols = tag.find_all('th' )
+    lis2.append(cols[0].text)
+    lis2.append(cols[1].text)
+    lis2.append(cols[2].text)
+    lis2.append(cols[3].text)
+    lis2.append(cols[4].text)
+    lis2.append(cols[5].text)
+    lis2.append(cols[6].text)
+  f.writerow(lis2) 
+  print(lis2)
+  for tag in tags[0:1]:
+    cols = tag.find_all('tr' )
+    for col in cols:
+      tds = col.find_all('td')
+      lis = []
+      if flag == False:
+        lis.append(tds[0].text.strip())
+        lis.append(tds[1].text.strip())
+        lis.append(tds[2].text.strip())
+        lis.append(tds[3].text.strip())
+        lis.append(tds[4].text.strip())
+        lis.append(tds[5].text.strip())  
+        lis.append(tds[6].text.strip())
+      if flag == False:
+        f.writerow(lis)  
+        print(lis)  
+      if col.find(text = True) and flag == True:
+       flag = False
+      
+   # lis.append(tds.text.strip())
+
+'''''    
+    row_tags = tags.find_all('tr')
+    
+    for tag in row_tags:
+      
+      data = []
+      cols = tag.find_all('td')  # find all td tags
+
+      for td in cols:
+        data.append(td.text.strip())                  
+      f.writerow(data)
+'''''
+
+

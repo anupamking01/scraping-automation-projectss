@@ -1,0 +1,113 @@
+Link: https://www.napanta.com/cold-storage
+ 
+ 
+code:
+ #import mechanize
+import bs4 as bs
+import urllib.request
+#import http.cookiejar as cookielib
+import csv
+source = urllib.request.urlopen(
+    'https://www.napanta.com/cold-storage').read()
+soup = bs.BeautifulSoup(source, 'lxml')
+
+with open('Assignment8(0).csv', 'w', newline='',encoding = "utf-8") as csvfile:
+    f = csv.writer(csvfile)
+    tags = soup.findAll("tr")
+    state = []
+    for tag in tags:
+      da = []
+      table_rows = tag.find_all('td')
+      for th in table_rows:
+       # li = []
+       da.append(th.text.strip())
+      state.append(da[1]) 
+       
+    for st in state:
+
+      district = []
+      
+      s=st.lower().replace(' ','-')
+     # print(s)
+      
+      source = urllib.request.urlopen('https://www.napanta.com/cold-storage/'+s).read()
+      soup = bs.BeautifulSoup(source, 'lxml')  
+      all_tags = soup.findAll("tr")
+     
+      for tag in all_tags:
+        data0 = []
+        rows = tag.find_all('td')
+        for th in rows:
+       # li = []
+          data0.append(th.text.strip())
+       # print(data[2])  
+       # f.writerow(data0)          
+        district.append(data0[2]) 
+      
+      for di in district:
+
+        di=di.lower().replace(' ','-')
+        print(di)
+        if not di[-1].isalpha():
+          continue
+        lis = []
+        lis.append(st)
+        lis.append(di)
+        f.writerow(lis) 
+        print(lis)
+        f.writerow([])
+
+        source = urllib.request.urlopen('https://www.napanta.com/cold-storage/'+s+'/'+di).read()   
+        soup = bs.BeautifulSoup(source, 'lxml')
+        all_vals = soup.findAll("tr")          
+        
+        
+        heads = []
+        head = soup.find_all('th')
+        for th in head:
+          heads.append(th.text.strip())
+        f.writerow(heads)
+        print(heads)  
+
+
+        for tag in all_vals:
+          data1 = []          
+          rows1 = tag.find_all('td')
+
+          for th in rows1:
+            data1.append(th.text.strip())
+          f.writerow(data1)  
+          print(data1)    
+           
+
+
+
+
+
+
+     
+      
+    
+    
+    
+'''''
+from bs4 import BeautifulSoup
+ 
+soup = BeautifulSoup(br.response().read())
+
+with open('Assignment7(4).csv', 'w', newline='',encoding = "utf-8") as csvfile:
+    f = csv.writer(csvfile)
+    tags = soup.findAll("tr")
+    
+    
+    for tr in tags[1:-1]:
+        data = []
+        cols = tr.find_all('td')  # find all td tags
+
+        for td in cols:
+            data.append(td.text.strip())
+        f.writerow(data)
+        print(data)
+
+'''''
+
